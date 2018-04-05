@@ -1,0 +1,105 @@
+{
+  "name": "cryptounicorn",
+  "version": "0.1.0",
+  "description": "cryptocurrency board calculator",
+  "main": "client/index.js",
+  "scripts": {
+    "build": "webpack --config build/webpack.prod.js && ./node_modules/.bin/babel api/in -d api/out",
+    "buildapi": "./node_modules/.bin/babel api/in -d api/out",
+    "dev": "node build/server.js",
+    "lint": "xo **/client/**/*.{vue,js} !node_modules/**",
+    "start": "node api/out/index.js",
+    "heroku-postbuild": "npm run build"
+  },
+  "author": "Ivo Sequeros del Rey",
+  "license": "MIT",
+  "xo": {
+    "extends": "./.eslintrc",
+    "esnext": true,
+    "envs": [
+      "browser"
+    ]
+  },
+  "babel": {
+    "presets": [
+      [
+        "vue-app",
+        {
+          "useBuiltIns": true
+        }
+      ]
+    ]
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {},
+      "postcss-nested": {}
+    }
+  },
+  "browserslist": [
+    "last 2 versions",
+    "ie > 8"
+  ],
+  "dependencies": {
+    "autoprefixer": "^6.4.0",
+    "babel-core": "^6.16.0",
+    "babel-loader": "^6.2.4",
+    "babel-preset-vue-app": "^1.1.1",
+    "base-64": "^0.1.0",
+    "ccxt": "^1.10.738",
+    "chalk": "^1.1.3",
+    "copy-webpack-plugin": "^4.0.1",
+    "cross-env": "^2.0.0",
+    "css-loader": "^0.23.1",
+    "eslint-config-vue": "latest",
+    "eslint-plugin-vue": "latest",
+    "express": "^4.14.0",
+    "extract-text-webpack-plugin": "^2.0.0-rc.3",
+    "file-loader": "^0.9.0",
+    "friendly-errors-webpack-plugin": "^1.1.2",
+    "html-webpack-plugin": "^2.22.0",
+    "is-online": "^7.0.0",
+    "node-static": "^0.7.10",
+    "offline-plugin": "^4.5.3",
+    "passport-http": "^0.3.0",
+    "postcss-loader": "^0.9.1",
+    "postcss-nested": "^1.0.0",
+    "promise-polyfill": "^6.0.2",
+    "raw-loader": "^0.5.1",
+    "rimraf": "^2.6.1",
+    "style-loader": "^0.13.1",
+    "uglifyjs-webpack-plugin3": "^1.0.0-beta",
+    "vue": "^2.2.0",
+    "vue-click-outside": "^1.0.7",
+    "vue-loader": "^11.0.0",
+    "vue-resource": "^1.3.5",
+    "vue-router": "^2.0.0",
+    "vue-smooth-height": "^1.1.11",
+    "vue-template-compiler": "^2.2.0",
+    "vuex": "^2.0.0",
+    "vuex-router-sync": "^4.0.0",
+    "webpack": "2.2.0",
+    "webpack-dev-server": "^2.6.1",
+    "xo": "^0.18.0",
+    "bcrypt": "^1.0.3",
+    "cookie-parser": "^1.4.3",
+    "mongoose": "^5.0.2",
+    "object-hash": "^1.2.0",
+    "passport": "^0.4.0",
+    "passport-http": "^0.3.0",
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0",
+    "passport-restify": "^1.0.1",
+    "restify": "^6.3.4",
+    "restify-await-promise": "^1.0.2",
+    "restify-cookies": "^0.2.2",
+    "restify-cors-middleware": "^1.1.0",
+    "restify-errors": "^5.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-runtime": "^6.26.0"
+  }
+}
