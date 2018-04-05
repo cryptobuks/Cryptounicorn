@@ -13,11 +13,25 @@ actions.status = async (req, res, next) => {
 
 actions.getToken = async (req, res, next) => {
   let generateToken = new Promise(async (resolve, reject) => {
-    let token = hash(req.user.email + new Date().getTime())
+    let check = (email, password) => await User.findOne({
+      email: email,
+      password: bcrypt.hashSync(password, 10)
+    })
+
+    let user = check(req.body.email, req.body.password)
+    if(!user) {
+      res.send(403, {
+        ok: false
+      })
+      next()
+    }
+
+
+    let token = hash(user.email + new Date().getTime())
     let exists = await User.findOne({ token: token })
     if(exists)
       return generateToken();
-    await User.findOneAndUpdate({ email: req.user.email }, { token: token }).catch(err => reject(err))
+    await User.findOneAndUpdate({ email: user.email }, { token: token }).catch(err => reject(err))
     resolve(token);
   })
   let token = await generateToken.catch(err => new errors.ConflictError())
