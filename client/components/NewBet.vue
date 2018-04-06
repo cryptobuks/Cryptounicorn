@@ -58,8 +58,7 @@ export default {
   methods: {
     test() {
       try {
-        let fn = new Function("return (" + this.code + ")()");
-        console.log("Test", fn());
+        this.runresult = eval("(" + this.code + ")()");
         return true
       }
       catch(err) {
@@ -70,6 +69,7 @@ export default {
       this.err = "";
       try {
         this.runresult = eval("(" + this.code + ")()");
+        alert("!")
       }
       catch(err) {
         console.log(err.message);

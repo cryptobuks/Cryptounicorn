@@ -8,7 +8,7 @@ const initial = {
   exchanges: [],
   indicators: [],
   session: null,
-  ENDPOINT: "http://localhost:8080/api/"
+  ENDPOINT: "/api/"
 };
 
 const state = initial;
