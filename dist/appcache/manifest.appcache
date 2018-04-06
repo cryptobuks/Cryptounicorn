@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#ver:2018-4-6 17:41:02
+#ver:2018-4-6 17:48:05
 #plugin:4.9.0
 
 CACHE:
@@ -11,19 +11,19 @@ CACHE:
 ./static/media/roboto-mono-v5-latin-regular.1db1469b.woff
 ./static/media/roboto-mono-v5-latin-regular.e92cc0fb.woff2
 ./vendor.49348dca.js
-./client.a660f85b.js
-./manifest.aabe7fa9.js
+./client.47b0af24.js
+./manifest.fbaffe79.js
 ./styles.25b0cb2d.css
 ./
 ./browserconfig.xml
 ./favicon-16x16.png
-./apple-touch-icon.png
+./favicon-32x32.png
 ./favicon.ico
-./android-chrome-192x192.png
+./apple-touch-icon.png
 ./safari-pinned-tab.svg
 ./site.webmanifest
+./android-chrome-192x192.png
 ./mstile-150x150.png
-./favicon-32x32.png
 ./android-chrome-384x384.png
 
 NETWORK:
