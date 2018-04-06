@@ -3,7 +3,7 @@
     <topbar></topbar>
     <sectionmenu :show="menu"/>
     <div class="content">
-      <bet class="bet"/>
+      <bet v-for="contract in contracts" :key="contract._id" :contract="contract" class="bet"/>
       <newbet v-for="newBet in newBets" :key="newBet" :id="newBet" class="bet"/>
     </div>
     <addbet></addbet>
@@ -22,7 +22,8 @@ import Sectionmenu from 'components/SectionMenu'
 export default {
   data: () => ({
     menu: false,
-    newBets: []
+    newBets: [],
+    contracts: []
   }),
   components: {
     Sectionmenu,
@@ -34,6 +35,16 @@ export default {
   mounted() {
     if(!this.$store.state.session)
       this.$router.push('/');
+    setInterval(async () => {
+      this.contracts = (await (await fetch(this.$store.state.ENDPOINT + "contract", {
+        method: 'GET',
+        headers: new Headers({
+          'Authorization': 'Bearer ' + this.$store.state.session.token
+        })
+      }))
+      .json())
+      .contracts
+    }, 2000)
   },
   methods: {
     openMenu() {
@@ -63,6 +74,8 @@ export default {
   }
 }
 .content {
+  display: flex;
+  flex-wrap: wrap;
 }
 .interpreter {
   display: none;

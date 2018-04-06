@@ -5,7 +5,8 @@ import restify_cors_middleware from "restify-cors-middleware"
 import passport from 'passport-restify'
 import {BasicStrategy} from 'passport-http'
 import BearerStrategy from 'passport-http-bearer'
-import Routes from './routes'
+import Executioner from "./executioner"
+import Routes from "./routes"
 
 export default () => {
   let server = restify.createServer()
@@ -14,14 +15,14 @@ export default () => {
     origins: ["*"],
     allowHeaders: ["*"],
     exposeHeaders: ["*"]
-  });
-  server.pre(cors.preflight);
+  })
+  server.pre(cors.preflight)
   server.use(cors.actual)
 
   server.on("uncaughtException", function(req, res, err, cb) {
-    console.log(err);
-    return cb();
-  });
+    console.log(err)
+    return cb()
+  })
 
   server.use(restify.plugins.queryParser())
   server.use(restify.plugins.bodyParser())
@@ -35,4 +36,6 @@ export default () => {
   server.listen(process.env.PORT || 8080, function() {
     console.log('%s listening at %s', server.name, server.url)
   })
+
+  Executioner()
 }

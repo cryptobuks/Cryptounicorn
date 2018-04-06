@@ -92,8 +92,30 @@ actions.setSetup = async (req, res, next) => {
   next();
 }
 
+actions.newParticipation = async (req, res, next) => {
+  let contract = await Contract.findOne({ _id: req.body.contract_id })
+  if(contract.executed) {
+    res.send(409, { ok: false });
+    return
+  }
+  contract.participations.push({
+    author_id: req.user._id,
+    author_name: req.user.name,
+    answer: req.body.answer,
+    amount: req.body.amount
+  })
+  console.log(contract.participations);
+  console.log("Participation:\n" + contract)
+  await contract.save().catch(err => {
+    throw err
+  })
+  res.send({ok: true});
+  next();
+}
+
 actions.newContract = async (req, res, next) => {
   let contract = new Contract({
+    title: req.body.title,
     code: req.body.code,
     ts_execution: req.body.ts_execution,
     author_id: req.user._id,
@@ -101,9 +123,9 @@ actions.newContract = async (req, res, next) => {
     participations: []
   });
   await contract.save().catch(err => {
-    throw err
-  })
-  res.send({ok: true});
+    throw err;
+  });
+  res.send({ ok: true });
   next();
 }
 

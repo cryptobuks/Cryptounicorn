@@ -90,6 +90,7 @@
     "restify-cors-middleware": "^1.1.0",
     "restify-errors": "^5.0.0",
     "rimraf": "^2.6.1",
+    "safe-eval": "^0.3.0",
     "style-loader": "^0.13.1",
     "uglifyjs-webpack-plugin3": "^1.0.0-beta",
     "vue": "^2.2.0",

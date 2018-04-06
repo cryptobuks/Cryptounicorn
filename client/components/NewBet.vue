@@ -1,8 +1,8 @@
 <template>
-  <div class="_indicator" :class="disabled ? 'alldisabled animated zoomOutUp' : ''">
+  <div class="_indicator" :class="disabled ? 'alldisabled animated zoomOut' : ''">
     <div class="front">
       <div class="top"><div class="label">New Code Contract</div><div class="label pointer" @click="close">x Discard</div></div>
-      <div class="title roboto"><div class="name" contenteditable="true">Title of your code</div></div>
+      <div class="title roboto"><div class="name" contenteditable="true" ref="title">Title of your code</div></div>
       <div class="code_wrap">
         <MonacoEditor
           height="200"
@@ -54,6 +54,11 @@ export default {
     deploying: false,
     disabled: false
   }),
+  computed: {
+    ts() {
+      return Moment(this.date).unix() + new Date().getTimezoneOffset()
+    }
+  },
   methods: {
     test() {
       try {
@@ -84,8 +89,9 @@ export default {
       }
 
       let data = {
+        title: this.$refs.title.textContent,
         code: this.code,
-        ts_execution: Moment(this.ts_execution).unix()
+        ts_execution: this.ts
       }
       fetch(this.$store.state.ENDPOINT + "contract", {
           method: 'POST',
@@ -114,7 +120,7 @@ export default {
       if(this.deploying) {
         this.deploying = false
       }
-      if(this.err != "") { 
+      if(this.err != "") {
         this.err = ""
       }
     }
