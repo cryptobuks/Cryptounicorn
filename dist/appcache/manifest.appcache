@@ -1,0 +1,33 @@
+CACHE MANIFEST
+#ver:2018-4-6 17:08:36
+#plugin:4.9.0
+
+CACHE:
+./static/media/cryptofont-webfont.6ea44f1f.woff
+./static/media/roboto-mono-v5-latin-300.4f691391.woff
+./static/media/roboto-mono-v5-latin-300.db95b37e.woff2
+./static/media/roboto-mono-v5-latin-700.f61e5a8d.woff
+./static/media/roboto-mono-v5-latin-700.4bc0bd04.woff2
+./static/media/roboto-mono-v5-latin-regular.1db1469b.woff
+./static/media/roboto-mono-v5-latin-regular.e92cc0fb.woff2
+./vendor.4db9b56e.js
+./client.d2d47063.js
+./manifest.983d6c0f.js
+./styles.f98c5491.css
+./
+./browserconfig.xml
+./favicon-16x16.png
+./favicon-32x32.png
+./apple-touch-icon.png
+./safari-pinned-tab.svg
+./site.webmanifest
+./mstile-150x150.png
+./android-chrome-192x192.png
+./favicon.ico
+./android-chrome-384x384.png
+
+NETWORK:
+*
+
+FALLBACK:
+/ /

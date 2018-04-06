@@ -9,7 +9,6 @@ export default () => {
   setInterval(async () => {
     /* Fetch Contracts */
     contracts = await Contract.find({})
-    console.log("Contract Iteration")
     for(let contract of contracts) {
       /* Check if eligible for execution */
       console.log(contract.ts_execution > Math.trunc(new Date().getTime() / 1000), contract.ts_execution, Math.trunc(new Date().getTime() / 1000));
@@ -30,7 +29,9 @@ export default () => {
       let losers = []
       let totallost = 0
       let totalwinnerbet = 0
-      for(let participation of contract.participations) {
+      for(let _participation of contract.participations) {
+        let participation = _participation[0]
+        console.log(participation.answer, "=", value, participation.answer == value);
         if(participation.answer == value) {
           winners.push({
             id: participation.author_id,
@@ -56,14 +57,9 @@ export default () => {
 
       console.log("Total Lost Amount:\n" + totallost)
       console.log("Total Winner Bet Amount:\n" + totalwinnerbet)
-      console.log("Winners:\n" + winners)
-      console.log("Losers:\n" + losers)
+      console.log("Winners:\n" + winners.toString())
+      console.log("Losers:\n" + losers.toString())
 
-      for(let loser of losers) {
-        let user = await User.findOne({ _id: loser.id })
-        user.details.unicorns -= loser.amount
-        await user.save()
-      }
       for(let winner of winners) {
         let user = await User.findOne({ _id: winner.id })
         user.details.unicorns += winner.amountwon

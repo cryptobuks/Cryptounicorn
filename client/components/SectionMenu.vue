@@ -5,8 +5,8 @@
       <div class="user">
         <div class="picture"><img src="https://avatars0.githubusercontent.com/u/4648330?s=460&v=4"/></div>
         <div class="details">
-          <div class="name">{{details.name}} {{details.surname}}</div>
-          <div class="data">{{details.unicorns}} Unicorns <div class="button">Buy</div> <div class="button">Sell</div></div>
+          <div class="name">{{this.$store.getters.getDetails.name}} {{this.$store.getters.getDetails.surname}}</div>
+          <div class="data">{{this.$store.getters.getDetails.unicorns}} Unicorns <div class="button">Buy</div> <div class="button">Sell</div></div>
           <div class="options">
             <div class="button"><router-link to="/" @click.native="signOff" event="mouseup">Sign Off</router-link></div>
           </div>
@@ -40,9 +40,6 @@ export default {
   computed: {
     path() {
       return this.$route.path
-    },
-    details() {
-      return this.$store.state.session.details
     }
   },
   methods: {
@@ -51,6 +48,9 @@ export default {
     }
   },
   mounted() {
+    setInterval(() => {
+      this.$store.commit("update");
+    }, 2000)
   }
 }
 </script>

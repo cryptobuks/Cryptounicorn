@@ -100,7 +100,7 @@ actions.newParticipation = async (req, res, next) => {
   }
   contract.participations.push({
     author_id: req.user._id,
-    author_name: req.user.name,
+    author_name: req.user.details.name,
     answer: req.body.answer,
     amount: req.body.amount
   })
@@ -109,6 +109,10 @@ actions.newParticipation = async (req, res, next) => {
   await contract.save().catch(err => {
     throw err
   })
+
+  req.user.details.unicorns -= req.body.amount;
+  await req.user.save()
+
   res.send({ok: true});
   next();
 }

@@ -25,7 +25,7 @@
       <div class="betarea" v-if="!contract.executed">
         <div class="label">Your Bet</div>
         <div class="betinput">
-          <input class="roboto" v-model="answer" placeholder="your answer bet here"/>
+          <input class="roboto" ref="answer" placeholder="your answer bet here"/>
           <div class="push pointer" @click="bet(1)">+1</div>
           <div class="push pointer" @click="bet(100)">+100</div>
           <div class="push pointer" @click="bet(1000)">+1000</div>
@@ -60,8 +60,7 @@ export default {
         glyphMargin: false
       }
     },
-    customamount: 0,
-    answer: ""
+    customamount: 0
   }),
   computed: {
     date() {
@@ -75,7 +74,7 @@ export default {
     bet(amount) {
       let data = {
         contract_id: this.contract._id,
-        answer: this.answer,
+        answer: this.$refs.answer.value,
         amount: amount
       }
       fetch(this.$store.state.ENDPOINT + "contract/participation", {

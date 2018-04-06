@@ -33,6 +33,17 @@ const mutations = {
         })).json()).details
     };
   },
+  async update(state) {
+    state.session = {
+          token: state.session.token,
+          details: (await (await fetch(state.ENDPOINT + "user/details", {
+              method: 'GET',
+              headers: new Headers({
+                'Authorization': 'Bearer ' + state.session.token
+              })
+            })).json()).details
+        };
+  },
   end(state) {
     state = initial
   },
@@ -84,6 +95,9 @@ const mutations = {
 };
 
 const getters = {
+  getDetails() {
+    return state.session.details;
+  },
   getExchanges: state => {
     return state.exchanges;
   },

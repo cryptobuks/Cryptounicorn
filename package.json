@@ -4,7 +4,8 @@
   "description": "cryptocurrency board calculator",
   "main": "client/index.js",
   "scripts": {
-    "build": "webpack --config build/webpack.prod.js && ./node_modules/.bin/babel api/in -d api/out",
+    "buildapp": "webpack --config build/webpack.prod.js",
+    "build": "./node_modules/.bin/babel api/in -d api/out",
     "buildapi": "./node_modules/.bin/babel api/in -d api/out",
     "dev": "node build/server.js",
     "lint": "xo **/client/**/*.{vue,js} !node_modules/**",

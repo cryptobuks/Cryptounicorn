@@ -20,7 +20,7 @@
       <div class="confirmarea">
         <div class="left">
       <div class="label">Contract execution date</div>
-          <input id="datetime" name="date" v-model="date" type="datetime-local" step="1">
+          <input id="datetime" name="date" ref="date" v-model="ddate" type="datetime-local" step="1">
         </div>
         <div class="right">
           <div class="push" @click="deploy" :disabled="deploying" :class="deploying ? 'disabled' : ''">{{deploylabel}}</div>
@@ -49,16 +49,11 @@ export default {
     code: "",
     runresult: "",
     err: "",
-    date: Moment().add(1, 'minutes').format("YYYY-MM-DD[T]HH:mm:ss"),
+    ddate: Moment().add(1, 'minutes').format("YYYY-MM-DD[T]HH:mm:ss"),
     deploylabel: "Deploy Code & Enable Contract",
     deploying: false,
     disabled: false
   }),
-  computed: {
-    ts() {
-      return Moment(this.date).unix() + new Date().getTimezoneOffset()
-    }
-  },
   methods: {
     test() {
       try {
@@ -87,11 +82,10 @@ export default {
         this.runresult = "Your code has error. Fix them prior to deployment.";
         return;
       }
-
       let data = {
         title: this.$refs.title.textContent,
         code: this.code,
-        ts_execution: this.ts
+        ts_execution: Moment(this.$refs.date.value).unix() + (new Date().getTimezoneOffset()/1000)
       }
       fetch(this.$store.state.ENDPOINT + "contract", {
           method: 'POST',
