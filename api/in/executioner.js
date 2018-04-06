@@ -1,4 +1,5 @@
 import { Contract, User } from "./models"
+import axios from "axios"
 const Sandbox = require("safe-eval")
 
 export default () => {
@@ -21,7 +22,9 @@ export default () => {
 
       /* Execute */
       console.log("Executing contract: " + contract._id + " by " + contract.author_name)
-      let value = Sandbox("(" + contract.code + ")()", null, { timeout: 5000 })
+      let value = null
+      let output = Sandbox("(" + contract.code + ")()", { Axios: axios }, { timeout: 5000 })
+      value = (typeof output == 'object') ? await output : output
       console.log("Execution outcome: " + value);
 
       /* Participation analysis */

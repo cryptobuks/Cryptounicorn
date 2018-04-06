@@ -218,6 +218,9 @@ export default {
   flex: 0 0 50%;
   margin-top: 10px;
   text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .alldisabled {
   pointer-events: none;
