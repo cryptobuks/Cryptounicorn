@@ -33,7 +33,7 @@ export default {
     Add
   },
   mounted() {
-    if(this.$store.state.session.test == undefined)
+    if(!this.$store.state.session)
       this.$router.push('/');
     this.$store.commit('reset');
     this.$store.commit('addExchange', 'cex');

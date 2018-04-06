@@ -32,30 +32,36 @@ export default {
   }),
   methods: {
     test() {
-      this.$store.commit("setTestSession");
+      this.$store.commit("test");
     },
     setWrong() {
       this.wrong = true;
       setTimeout(() => this.wrong = false, 2000)
     },
-    submit() {
+    async submit() {
       let headers = new Headers();
-      console.log('Basic ' + base64.encode(this.$refs.email.value + ":" + this.$refs.password.value))
-      headers.append('Authorization', 'Basic ' + base64.encode(this.$refs.email.value + ":" + this.$refs.password.value));
-      fetch(this.$store.state.ENDPOINT + "token", {
-        method:'GET',
-        headers: headers,
-        credentials: 'include'
-       })
-        .then(response => {
-          if(response.status == 401) {
-            this.setWrong();
-          }
-          if(response.status == 200) {
-            console.log("ok")
-          }
-        })
-    }
+      let data = {
+        email: this.$refs.email.value,
+        password: this.$refs.password.value
+      }
+      let response = await fetch(this.$store.state.ENDPOINT + "token", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+      })
+      console.log(response)
+      if(response.status == 403) {
+        this.setWrong();
+      }
+      if(response.status == 200) {
+        let body = await response.json()
+        this.$store.commit("start", body.token)
+        this.$router.push("/welcome")
+      }
+}
   }
 }
 </script>

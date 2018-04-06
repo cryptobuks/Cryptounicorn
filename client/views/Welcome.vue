@@ -1,12 +1,11 @@
 <template>
-  <div class="_bet">
+  <div class="_board">
     <topbar></topbar>
     <sectionmenu :show="menu"/>
     <div class="content">
-      <bet class="bet"/>
-      <newbet v-for="newBet in newBets" :key="newBet" :id="newBet" class="bet"/>
+      <div class="title">Welcome Back&nbsp;<b>{{details.name}}</b></div>
+      <div class="credit">Your current credit amounts to <span><b>{{details.unicorns}}</b> unicorns</span></div>
     </div>
-    <addbet></addbet>
   </div>
 </template>
 
@@ -14,22 +13,20 @@
 import "../assets/css/flexboxgrid.min"
 import "../assets/css/cryptofont.min.css"
 import Topbar from 'components/Topbar'
-import Newbet from 'components/Newbet'
-import Bet from 'components/Bet'
-import Addbet from 'components/Addbet'
 import Sectionmenu from 'components/SectionMenu'
 
 export default {
   data: () => ({
-    menu: false,
-    newBets: []
+    menu: false
   }),
   components: {
     Sectionmenu,
-    Bet,
-    Newbet,
-    Topbar,
-    Addbet
+    Topbar
+  },
+  computed: {
+    details() {
+      return this.$store.state.session.details
+    }
   },
   mounted() {
     if(!this.$store.state.session)
@@ -41,16 +38,6 @@ export default {
     },
     closeMenu() {
       this.menu = false;
-    },
-    removeNew(v) {
-      for(let i = 0; i < this.newBets.length; i++)
-        if(this.newBets[i] == v) {
-          this.newBets.splice(i, 1);
-          break;
-        }
-    },
-    addNew() {
-      this.newBets.push(new Date().getTime())
     }
   }
 }
@@ -63,9 +50,21 @@ export default {
   }
 }
 .content {
+  padding-left: 50px;
 }
-.interpreter {
-  display: none;
+.title {
+  font-size: 60px;
+  color: #e0e0e0;
+  font-weight: lighter;
+}
+.credit {
+  font-size: 20px;
+  color: #999;
+  font-weight: lighter;
+  margin-top: 15px;
+}
+.credit span {
+  color: #FF057C;
 }
 .menu {
   background-color: #000;
@@ -81,18 +80,5 @@ export default {
   padding-bottom: 15px;
   text-transform: uppercase;
   letter-spacing: 1px;
-}
-.row-exchanges {
-  overflow: scroll;
-}
-
-.bet {
-  width: 100%;
-  padding: 0 20px;
-}
-@media screen and (min-width: 980px) {
-  .bet {
-    width: 50%;
-  }
 }
 </style>

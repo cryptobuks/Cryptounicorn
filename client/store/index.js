@@ -4,12 +4,15 @@ import {$} from '../$'
 let ccxt = require("ccxt")
 Vue.use(Vuex)
 
-const state = {
+const initial = {
   exchanges: [],
   indicators: [],
-  session: {},
-  ENDPOINT: "/api/"
+  session: null,
+  ENDPOINT: "http://localhost:8080/api/"
 };
+
+const state = initial;
+
 const mutations = {
   addExchange(state, id) {
     state.exchanges.push({
@@ -18,6 +21,22 @@ const mutations = {
       pairs: []
     });
   },
+  async start(state, token) {
+    console.log(token)
+    state.session = {
+      token: token,
+      details: (await (await fetch(state.ENDPOINT + "user/details", {
+          method: 'GET',
+          headers: new Headers({
+            'Authorization': 'Bearer ' + token
+          })
+        })).json()).details
+    };
+  },
+  end(state) {
+    state = initial
+  },
+  downloadState() {},
   emptyIndicator(state) {
     state.indicators.push({});
   },
@@ -26,43 +45,43 @@ const mutations = {
     state.indicators.push(data);
   },
   removeExchange(state, id) {
-    for(let i in state.exchanges)
-      if(state.exchanges[i].id == id) {
+    for (let i in state.exchanges)
+      if (state.exchanges[i].id == id) {
         state.exchanges.splice(i, 1);
         break;
       }
   },
   removeIndicator(state, id) {
-    for(let i in state.indicators)
-      if(state.indicators[i].id == id) {
+    for (let i in state.indicators)
+      if (state.indicators[i].id == id) {
         state.indicators.splice(i, 1);
         break;
       }
   },
   updateIndicator(state, data) {
-    for(let i in state.indicators)
-      if(state.indicators[i].id == data.id)
-        state.indicators[i] = data;
+    for (let i in state.indicators)
+      if (state.indicators[i].id == data.id) state.indicators[i] = data;
   },
   updatePairs(state, data) {
-    let pairs = data.pairs, id = data.id;
-    for(let i in state.exchanges)
-      if(state.exchanges[i].id == id) {
+    let pairs = data.pairs,
+      id = data.id;
+    for (let i in state.exchanges)
+      if (state.exchanges[i].id == id) {
         state.exchanges[i].pairs = pairs;
         break;
       }
-    $.$emit('pairs:updates');
+    $.$emit("pairs:updates");
   },
   reset() {
     state.exchanges = [];
     state.indicators = [];
   },
-  setTestSession(state) {
+  test(state) {
     state.session = {
       test: true
     };
   }
-}
+};
 
 const getters = {
   getExchanges: state => {

@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Bet from '../views/Bet'
 import Plan from "../views/Plan"
-import Home from "../views/Home";
+import Welcome from "../views/Welcome"
+import Home from "../views/Home"
 
 
 
@@ -15,6 +16,10 @@ export default new Router({
     {
       path: "/bet",
       component: Bet
+    },
+    {
+      path: "/welcome",
+      component: Welcome
     },
     {
       path: "/",

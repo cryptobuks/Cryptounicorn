@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <transition name="fade">
       <router-view></router-view>
-    </transition>
   </div>
 </template>
 
@@ -12,6 +10,7 @@ export default {
     mobile: (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
   })
 }
+
 </script>
 
 <style>
@@ -68,16 +67,6 @@ body,#app,html {
 a {
   text-decoration: none;
   color: inherit;
-}
-.fade-enter-active, .fade-leave-active {
-  transition-property: opacity;
-  transition-duration: 0.25s;
-}
-.fade-enter-active {
-  transition-delay: 0.25s;
-}
-.fade-enter, .fade-leave-active {
-  opacity: 0
 }
 .roboto {
   font-family: "Roboto Mono", -apple-system;

@@ -5,10 +5,10 @@
       <div class="user">
         <div class="picture"><img src="https://avatars0.githubusercontent.com/u/4648330?s=460&v=4"/></div>
         <div class="details">
-          <div class="name">Ivo Sequeros del Rey</div>
-          <div class="data">3000 Unicorns <div class="button">Buy</div> <div class="button">Sell</div></div>
+          <div class="name">{{details.name}} {{details.surname}}</div>
+          <div class="data">{{details.unicorns}} Unicorns <div class="button">Buy</div> <div class="button">Sell</div></div>
           <div class="options">
-            <div class="button">Sign Off</div>
+            <div class="button"><router-link to="/" @click.native="signOff" event="mouseup">Sign Off</router-link></div>
           </div>
         </div>
       </div>
@@ -29,20 +29,26 @@ export default {
   ],
   data: () => ({
     sections: [{
-      title: 'Code-Bet',
+      title: '{} Code Contracts',
       url: '/bet'
     },
     {
-      title: 'CryptoPlan',
+      title: '♞ Cryptoplanning',
       url: '/plan'
     }]
   }),
   computed: {
     path() {
       return this.$route.path
+    },
+    details() {
+      return this.$store.state.session.details
     }
   },
   methods: {
+    signOff() {
+      this.$store.commit("end")
+    }
   },
   mounted() {
   }
@@ -84,8 +90,7 @@ export default {
   color: #888;
   padding: 10px 15px 10px 73px;
   border-top: #1e1e1e thin solid;
-  text-transform: uppercase;
-  letter-spacing: 6px;
+  font-size: 15px;
 }
 .section:hover {
   color: #FF057C;

@@ -10,6 +10,14 @@ import Routes from './routes'
 export default () => {
   let server = restify.createServer()
 
+  const cors = restify_cors_middleware({
+    origins: ["*"],
+    allowHeaders: ["*"],
+    exposeHeaders: ["*"]
+  });
+  server.pre(cors.preflight);
+  server.use(cors.actual)
+
   server.on("uncaughtException", function(req, res, err, cb) {
     console.log(err);
     return cb();
@@ -20,7 +28,6 @@ export default () => {
   server.use(restify.plugins.gzipResponse())
   server.use(passport.initialize())
 
-  passport.use(new BasicStrategy({}, Auth.basic))
   passport.use(new BearerStrategy({}, Auth.bearer))
 
   Routes(server, passport)
