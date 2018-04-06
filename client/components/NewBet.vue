@@ -35,6 +35,7 @@
 import '../assets/css/animate.css'
 import MonacoEditor from 'vue-monaco-editor'
 import Moment from "moment"
+import Axios from "axios"
 import {$} from '../$'
 
 export default {
@@ -68,8 +69,7 @@ export default {
     run() {
       this.err = "";
       try {
-        let fn = new Function("return (" + this.code + ")()");
-        this.runresult = fn();
+        this.runresult = eval("(" + this.code + ")()");
       }
       catch(err) {
         console.log(err.message);
@@ -78,10 +78,6 @@ export default {
     },
     deploy() {
       this.deploying = true;
-      if(!this.test()) {
-        this.runresult = "Your code has error. Fix them prior to deployment.";
-        return;
-      }
       let data = {
         title: this.$refs.title.textContent,
         code: this.code,

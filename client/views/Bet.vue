@@ -18,7 +18,6 @@ import Newbet from 'components/Newbet'
 import Bet from 'components/Bet'
 import Addbet from 'components/Addbet'
 import Sectionmenu from 'components/SectionMenu'
-import Axios from "axios"
 
 export default {
   data: () => ({
