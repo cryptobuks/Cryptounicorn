@@ -1,16 +1,10 @@
 
 <img src="https://cryptounicorn.live/safari-pinned-tab.svg" width="100" height="100" />
-**CryptoUnicorn** is a cryptocurrency live tracker & calculator web app.
 
-You can keep all live prices from your favourite exchanges on the same page and create indicators based on the prices.
+**CryptoUnicorn** is a cryptocurrency live tracker, calculator & live code bet web app.
 
-App:
+Bet on code contracts + keep all live prices from your favourite exchanges on the same page and create indicators based on the prices.
 
-Uses VuePack: Vue + Vuex + Webkit + Babel and serves the page using node-static. It has a size of ~4MB.
-
-Api:
-
-Uses Express + Babel
 
 Check it out live on **https://cryptounicorn.live**
 
@@ -23,6 +17,8 @@ The structure of this project is the following:
 - static: contains all of the app static files: favicons, app manifest & icons
 
 ### App
+
+Uses VuePack: Vue + Vuex + Webkit + Babel and serves the page using node-static. It has a size of ~4MB.
 
 **Development:**
 
@@ -45,6 +41,8 @@ yarn start (or) npm start
 ```
 
 ### Api
+
+Uses Express + Babel
 
 **Build:**
 
