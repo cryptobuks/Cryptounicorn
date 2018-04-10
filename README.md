@@ -1,17 +1,28 @@
 
-<img src="https://cryptounicorn.live/android-chrome-256x256.png" width="100" height="100" />
-
+<img src="https://cryptounicorn.live/safari-pinned-tab.svg" width="100" height="100" />
 **CryptoUnicorn** is a cryptocurrency live tracker & calculator web app.
 
 You can keep all live prices from your favourite exchanges on the same page and create indicators based on the prices.
 
+App:
 
+Uses VuePack: Vue + Vuex + Webkit + Babel and serves the page using node-static. It has a size of ~4MB.
 
-It uses VuePack: Vue + Vuex + Webkit + Babel and serves the page using node-static. It has a size of ~4MB.
+Api:
+
+Uses Express + Babel
 
 Check it out live on **https://cryptounicorn.live**
 
+The structure of this project is the following:
 
+- **api: contains api nodejs files**
+- build: contains app compilation files
+- **client: contains app source code files**
+- dist: contains last app release (compiled client source files)
+- static: contains all of the app static files: favicons, app manifest & icons
+
+### App
 
 **Development:**
 
@@ -19,10 +30,10 @@ Check it out live on **https://cryptounicorn.live**
 yarn dev (or) npm run dev
 ```
 
-**Production:**
+**Build:**
 
 ```
-yarn build (or) npm run build
+yarn buildapp (or) npm run buildapp
 ```
 
 Outputs to a new folder /dist
@@ -33,6 +44,18 @@ Once, /dist is generated, *node-static* can serve the app:
 yarn start (or) npm start
 ```
 
+### Api
 
+**Build:**
+
+```
+yarn buildapi (or) npm run buildapi
+```
+
+**Start:**
+
+```
+yarn start (or) npm start
+```
 
 License:  **Apache License 2.0**
